@@ -1,25 +1,25 @@
-import ReactDOM from "react-dom";
-import React from 'react';
+import ReactDOM from 'react-dom'
+import React from 'react'
 
 class App extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {}
-        this.authFunc = this.authFunc.bind(this);
+        this.authFunc = this.authFunc.bind(this)
     }
-    authFunc() {
-        const authData = { data: "Auth on my site" };
+    async authFunc() {
+        const authData = {
+            data: 'Auth on my site'
+        }
         if (WavesKeeper) {
-            WavesKeeper.auth( authData )
-            .then(auth => {
-                console.log( auth ); //displaying the result on the console
-                /*...processing data */
-            }).catch(error => {
-                console.error( error ); // displaying the result on the console
-                /*...processing errors */
-            })
+            try {
+                const auth = await WavesKeeper.auth(authData)
+                console.log(auth)
+            } catch(error) {
+                console.error(error)
+            }
         } else {
-            alert("To Auth WavesKeeper should be installed.");
+            alert('To Auth WavesKeeper should be installed')
         }
     }
     render() {
